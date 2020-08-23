@@ -5,3 +5,5 @@ django-embed-video
 python-memcached
 django-memcache-status
 djangorestframework
+psycopg2
+uwsgi
