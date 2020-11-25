@@ -1,9 +1,9 @@
-Django~=3.1
+django
 Pillow
 django-braces
 django-embed-video
 python-memcached
 django-memcache-status
 djangorestframework
-psycopg2
 uwsgi
+psycopg2-binary
