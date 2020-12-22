@@ -1,7 +1,7 @@
 My Educations (Django, Python)
 ==============
 ---
-    Web application "Bulletin Board" on Django - Online learning platform
+    Web application on Django - Online learning platform
 >Developer: Aleksandr Suvorov
 
 ---
@@ -35,7 +35,7 @@ https://paypal.me/myhackband
 Description:
 ---
 
-    Web application "Bulletin Board" on Django - Online learning platform
+    Web application on Django - Online learning platform
 
 ---
 
