@@ -2,9 +2,9 @@ from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, \
-                                      DeleteView
+    DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, \
-                                       PermissionRequiredMixin
+    PermissionRequiredMixin
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic.base import TemplateResponseMixin, View
 from django.forms.models import modelform_factory
@@ -113,15 +113,15 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
 
     def dispatch(self, request, module_id, model_name, id=None):
         self.module = get_object_or_404(Module,
-                                       id=module_id,
-                                       course__owner=request.user)
+                                        id=module_id,
+                                        course__owner=request.user)
         self.model = self.get_model(model_name)
         if id:
             self.obj = get_object_or_404(self.model,
                                          id=id,
                                          owner=request.user)
         return super(ContentCreateUpdateView,
-           self).dispatch(request, module_id, model_name, id)
+                     self).dispatch(request, module_id, model_name, id)
 
     def get(self, request, module_id, model_name, id=None):
         form = self.get_form(self.model, instance=self.obj)
@@ -176,7 +176,7 @@ class ModuleOrderView(CsrfExemptMixin,
     def post(self, request):
         for id, order in self.request_json.items():
             Module.objects.filter(id=id,
-                   course__owner=request.user).update(order=order)
+                                  course__owner=request.user).update(order=order)
         return self.render_json_response({'saved': 'OK'})
 
 
@@ -186,8 +186,8 @@ class ContentOrderView(CsrfExemptMixin,
     def post(self, request):
         for id, order in self.request_json.items():
             Content.objects.filter(id=id,
-                       module__course__owner=request.user) \
-                       .update(order=order)
+                                   module__course__owner=request.user) \
+                .update(order=order)
         return self.render_json_response({'saved': 'OK'})
 
 
@@ -199,10 +199,10 @@ class CourseListView(TemplateResponseMixin, View):
         subjects = cache.get('all_subjects')
         if not subjects:
             subjects = Subject.objects.annotate(
-                           total_courses=Count('courses'))
+                total_courses=Count('courses'))
             cache.set('all_subjects', subjects)
         all_courses = Course.objects.annotate(
-                                   total_modules=Count('modules'))
+            total_modules=Count('modules'))
         if subject:
             subject = get_object_or_404(Subject, slug=subject)
             key = 'subject_{}_courses'.format(subject.id)
@@ -228,5 +228,5 @@ class CourseDetailView(DetailView):
         context = super(CourseDetailView,
                         self).get_context_data(**kwargs)
         context['enroll_form'] = CourseEnrollForm(
-                                   initial={'course':self.object})
+            initial={'course': self.object})
         return context
